@@ -2,6 +2,8 @@ from scipy.stats import norm
 import random
 import time
 
+people_dict = []
+
 # Create a person class to simulate one person
 class Person:
     def __init__(self, starting_immunity):
@@ -34,3 +36,12 @@ class Person:
         lockdown_day = int(input("After what day should lockdown be enforced: "))
         mask_day = int(input("What day do masks begin to be worn: "))
         return days_contagious, lockdown_day, mask_day
+
+        def run_day(days_contagious, lockdown):
+            # This simulates the spread, so it only operates in catagious people
+            for person in [
+                person
+                for person in people_dict
+                if person.contagiousness > 0 and person.friends > 0
+            ]:
+                pass
