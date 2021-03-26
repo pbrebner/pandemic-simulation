@@ -44,4 +44,31 @@ class Person:
                 for person in people_dict
                 if person.contagiousness > 0 and person.friends > 0
             ]:
-                pass
+                potential_interactions = int(person.friends / 2)
+                if potential_interactions > 0:
+                    interactions = random.randint(0, potential_interactions)
+                else:
+                    interactions = 0
+
+                if lockdown == True:
+                    interactions = 0
+
+                for x in range(0, interactions):
+                    interaction_in_question = people_dict[
+                        random.randint(0, len(people_dict) - 1)
+                    ]
+                    if (
+                        random.randint(0, 100) < person.contagiousness
+                        and interaction_in_question.contagiousness == 0
+                        and interaction_in_question.immunity == False
+                    ):
+                        interaction_in_question.contagiousness = int(
+                            (nor.rvs(size=1, loc=0.5, scale=0.15)[0] * 10).round(0) * 10
+                        )
+                        print(
+                            people_dict.index(person),
+                            ">>>",
+                            people_dict.index(interaction_in_question),
+                        )
+
+            pass
